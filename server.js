@@ -32,6 +32,15 @@ if (process.env.NODE_ENV === "production") {
 
 // Define API routes here
 
+// this is our get method
+// this method fetches all available data in our database
+app.get("/api/books", (req, res) => {
+  Data.find((err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
