@@ -54,6 +54,7 @@ app.post("/api/books", function(req, res) {
   db.Books.save({})
   .then(function(dbBooks) {
     res.json(dbBooks);
+    console.log("book added to db!")
   })
   .catch(function(err) {
     res.json(err);
@@ -61,10 +62,17 @@ app.post("/api/books", function(req, res) {
 });
 
 //* `/api/books/:id` (delete) - Will be used to delete a book from the database by Mongo `_id`.
-
-//* `*` (get) - Will load your single HTML page in `client/build/index.html`. Make sure you have this _after_ all other routes are defined.
-
-
+app.delete("/api/books/:id", function(req.res) {
+  let id = ObjectID(req.params.id);
+  db.Books.deleteOne(id)
+  .then(function(dbBooks) {
+    res.json(dbBooks);
+    console.log("book deleted! id " + id);
+  })
+  .catch(function(err) {
+    res.json(err);
+  });
+});
 
 // Send every other request to the React app
 // Define any API routes before this runs
