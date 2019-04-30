@@ -1,0 +1,38 @@
+body {
+    background: whitesmoke;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.nav-tabs {
+    background: rgb(112, 130, 56);
+    color:  rgb(218, 193, 81);
+    height: 130px;
+    font-size: 60px;
+    text-align: left;
+}
+
+.nav-item {
+    font-size: 36px;
+    float: right;
+    background:  rgb(218, 193, 81);
+    color: rgb(112, 130, 56);
+    border: 2px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-top: 50px;
+    border-radius: 3px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(112, 130, 56);
+    text-decoration: none;
+}
+
+a:active {
+    color: rgb(112, 130, 56);
+    text-decoration: none;
+}
