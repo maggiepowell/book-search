@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === "production") {
 // this is our get method
 // this method fetches all available data in our database
 app.get("/api/books", (req, res) => {
-  Data.find((err, data) => {
+  db.Article.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
