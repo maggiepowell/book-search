@@ -1,12 +1,14 @@
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-const app = express();
 const mongoose = require('mongoose');
+
+// Initialize Express
+const app = express();
 
 
 // this is our MongoDB database
-const dbRoute = "mongodb://googlebooks";
+const dbRoute = "mongodb://localhost/googlebooks";
 
 // connects our back end code with the database
 mongoose.connect(
@@ -23,6 +25,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 
 // Define middleware here
+// Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
@@ -32,14 +35,27 @@ if (process.env.NODE_ENV === "production") {
 
 // Define API routes here
 
-// this is our get method
-// this method fetches all available data in our database
-app.get("/api/books", (req, res) => {
-  db.Article.find((err, data) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, data: data });
+// Add routes, both API and view
+//6. Add the following Express routes for your app:
+
+//* `/api/books` (get) - Should return all saved books as JSON.
+app.get("/api/books", function(req, res) {
+  db.Article.find({})
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
   });
 });
+
+//* `/api/books` (post) - Will be used to save a new book to the database.
+
+//* `/api/books/:id` (delete) - Will be used to delete a book from the database by Mongo `_id`.
+
+//* `*` (get) - Will load your single HTML page in `client/build/index.html`. Make sure you have this _after_ all other routes are defined.
+
+
 
 // Send every other request to the React app
 // Define any API routes before this runs
