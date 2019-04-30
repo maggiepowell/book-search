@@ -40,9 +40,9 @@ if (process.env.NODE_ENV === "production") {
 
 //* `/api/books` (get) - Should return all saved books as JSON.
 app.get("/api/books", function(req, res) {
-  db.Article.find({})
-  .then(function(dbArticle) {
-    res.json(dbArticle);
+  db.Books.find({})
+  .then(function(dbBooks) {
+    res.json(dbBooks);
   })
   .catch(function(err) {
     res.json(err);
@@ -50,6 +50,15 @@ app.get("/api/books", function(req, res) {
 });
 
 //* `/api/books` (post) - Will be used to save a new book to the database.
+app.post("/api/books", function(req, res) {
+  db.Books.save({})
+  .then(function(dbBooks) {
+    res.json(dbBooks);
+  })
+  .catch(function(err) {
+    res.json(err);
+  });
+});
 
 //* `/api/books/:id` (delete) - Will be used to delete a book from the database by Mongo `_id`.
 
